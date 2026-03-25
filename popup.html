@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">Curtain</h1>
+
+    <!-- Status -->
+    <div id="status" class="status status-safe">
+      <span id="status-icon">&#x1f7e2;</span>
+      <span id="status-text">一般模式</span>
+    </div>
+
+    <!-- Toggle Button -->
+    <button id="toggle-btn" class="btn btn-activate">
+      拉下簾幕
+    </button>
+
+    <!-- Hidden counts -->
+    <div id="counts" class="counts hidden">
+      <span>已隱藏：</span>
+      <span id="history-count">0</span> 筆紀錄、
+      <span id="bookmark-count">0</span> 個書籤
+    </div>
+
+    <!-- Tip for residual items -->
+    <div id="tip" class="tip hidden">
+      若網址列仍有殘留建議，可選取該項後按 <kbd>Shift</kbd>+<kbd>Delete</kbd> 手動移除
+    </div>
+
+    <hr>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab active" data-tab="sites">監控網站</button>
+      <button class="tab" data-tab="keywords">敏感關鍵字</button>
+    </div>
+
+    <!-- Site List -->
+    <div id="tab-sites" class="tab-content active">
+      <p class="tab-desc">比對網域：該網站的紀錄與書籤會被隱藏</p>
+      <ul id="site-list" class="item-list"></ul>
+      <div class="add-row">
+        <input id="new-site" type="text" placeholder="輸入網域，例如 xvideos.com">
+        <button id="add-site-btn" class="btn btn-small">新增</button>
+      </div>
+    </div>
+
+    <!-- Keyword List -->
+    <div id="tab-keywords" class="tab-content">
+      <p class="tab-desc">比對關鍵字：任何網站的 URL 或標題含有該詞都會被隱藏（例如 GitHub 上的相關工具）</p>
+      <ul id="keyword-list" class="item-list"></ul>
+      <div class="add-row">
+        <input id="new-keyword" type="text" placeholder="輸入關鍵字，例如 onlyfans">
+        <button id="add-keyword-btn" class="btn btn-small">新增</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
