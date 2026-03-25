@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; }
+
+  .screenshot {
+    width: 1280px;
+    height: 800px;
+    position: relative;
+    overflow: hidden;
+    display: none;
+  }
+  .screenshot.active { display: flex; }
+
+  /* ============ Screenshot 1: Hero / Overview ============ */
+  .hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .hero-icon {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #e53935, #ff7043);
+    border-radius: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+    box-shadow: 0 20px 60px rgba(229,57,53,0.3);
+  }
+  .hero h1 {
+    color: #fff;
+    font-size: 56px;
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+  .hero p {
+    color: rgba(255,255,255,0.7);
+    font-size: 24px;
+    max-width: 600px;
+    text-align: center;
+    line-height: 1.5;
+  }
+  .hero-features {
+    display: flex;
+    gap: 40px;
+    margin-top: 20px;
+  }
+  .hero-feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: rgba(255,255,255,0.85);
+    font-size: 18px;
+  }
+  .hero-feature-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+  }
+
+  /* ============ Screenshot 2: How it works ============ */
+  .how-it-works {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 50px;
+  }
+  .how-it-works h2 {
+    color: #fff;
+    font-size: 42px;
+    font-weight: 700;
+  }
+  .steps {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+  }
+  .step {
+    width: 340px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 36px 28px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .step-num {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e53935, #ff7043);
+    color: #fff;
+    font-size: 24px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+  }
+  .step h3 {
+    color: #fff;
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+  .step p {
+    color: rgba(255,255,255,0.6);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .step-emoji {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+
+  /* ============ Screenshot 3: Features ============ */
+  .features-screen {
+    background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .features-screen h2 {
+    color: #fff;
+    font-size: 42px;
+    font-weight: 700;
+  }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1000px;
+  }
+  .feature-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 28px 24px;
+  }
+  .feature-card-icon {
+    font-size: 36px;
+    margin-bottom: 14px;
+  }
+  .feature-card h4 {
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  .feature-card p {
+    color: rgba(255,255,255,0.55);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* ============ Screenshot 4: Popup mock ============ */
+  .popup-screen {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+  }
+  .mock-popup {
+    width: 340px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    overflow: hidden;
+    padding: 20px;
+  }
+  .mock-popup h3 {
+    font-size: 18px;
+    color: #1976d2;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .mock-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 14px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .mock-status.safe { background: #e8f5e9; color: #2e7d32; }
+  .mock-status.active { background: #fff3e0; color: #e65100; }
+  .mock-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  .mock-btn.activate { background: #ef5350; }
+  .mock-btn.restore { background: #43a047; }
+  .mock-counts {
+    text-align: center;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 8px;
+  }
+  .mock-tip {
+    background: #e3f2fd;
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-size: 11px;
+    color: #1565c0;
+    line-height: 1.4;
+  }
+  .mock-tip kbd {
+    background: #fff;
+    border: 1px solid #90caf9;
+    border-radius: 3px;
+    padding: 1px 4px;
+    font-family: monospace;
+    font-size: 10px;
+  }
+  .popup-label {
+    color: rgba(255,255,255,0.5);
+    font-size: 16px;
+    margin-top: 10px;
+    text-align: center;
+  }
+  .popup-label-title {
+    color: #fff;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .popup-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .arrow-between {
+    font-size: 48px;
+    color: rgba(255,255,255,0.3);
+    display: flex;
+    align-items: center;
+  }
+
+  /* ============ Screenshot 5: Use cases ============ */
+  .usecases-screen {
+    background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .usecases-screen h2 {
+    color: #fff;
+    font-size: 42px;
+    font-weight: 700;
+  }
+  .usecases {
+    display: flex;
+    gap: 32px;
+  }
+  .usecase {
+    width: 260px;
+    text-align: center;
+    padding: 32px 20px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .usecase-emoji { font-size: 56px; margin-bottom: 16px; }
+  .usecase h4 { color: #fff; font-size: 20px; margin-bottom: 8px; }
+  .usecase p { color: rgba(255,255,255,0.5); font-size: 14px; line-height: 1.5; }
+
+  /* ============ Promo 440x280 ============ */
+  .promo-small {
+    width: 440px;
+    height: 280px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .promo-small.active { display: flex; }
+  .promo-small .promo-icon {
+    width: 72px;
+    height: 72px;
+    background: linear-gradient(135deg, #e53935, #ff7043);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    box-shadow: 0 10px 30px rgba(229,57,53,0.3);
+  }
+  .promo-small h2 {
+    color: #fff;
+    font-size: 32px;
+    font-weight: 700;
+  }
+  .promo-small p {
+    color: rgba(255,255,255,0.6);
+    font-size: 16px;
+    max-width: 340px;
+    text-align: center;
+  }
+
+  /* Nav for preview */
+  .nav {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    background: rgba(0,0,0,0.8);
+    padding: 8px 16px;
+    border-radius: 30px;
+    z-index: 999;
+  }
+  .nav button {
+    padding: 6px 14px;
+    border: none;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .nav button.active { background: #e53935; }
+</style>
+</head>
+<body>
+
+<!-- Screenshot 1: Hero -->
+<div class="screenshot hero active" id="s1">
+  <div class="hero-icon">🪟</div>
+  <h1>Curtain</h1>
+  <p>一鍵隱藏敏感瀏覽紀錄與書籤<br>分享螢幕前的隱私防護</p>
+  <div class="hero-features">
+    <div class="hero-feature">
+      <div class="hero-feature-icon" style="background:rgba(229,57,53,0.2)">🔒</div>
+      <span>一鍵隱藏</span>
+    </div>
+    <div class="hero-feature">
+      <div class="hero-feature-icon" style="background:rgba(67,160,71,0.2)">🔄</div>
+      <span>一鍵恢復</span>
+    </div>
+    <div class="hero-feature">
+      <div class="hero-feature-icon" style="background:rgba(25,118,210,0.2)">💻</div>
+      <span>100% 本地處理</span>
+    </div>
+  </div>
+</div>
+
+<!-- Screenshot 2: How it works -->
+<div class="screenshot how-it-works" id="s2">
+  <h2>使用方式</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-emoji">⚙️</div>
+      <div class="step-num">1</div>
+      <h3>設定清單</h3>
+      <p>新增要隱藏的網站和關鍵字，或直接使用內建的 50+ 預設網站</p>
+    </div>
+    <div class="step">
+      <div class="step-emoji">🪟</div>
+      <div class="step-num">2</div>
+      <h3>拉下簾幕</h3>
+      <p>一鍵隱藏所有匹配的瀏覽紀錄和書籤，搜尋建議也會被關閉</p>
+    </div>
+    <div class="step">
+      <div class="step-emoji">✅</div>
+      <div class="step-num">3</div>
+      <h3>恢復全部</h3>
+      <p>場景結束後一鍵還原，所有紀錄和書籤回到原處</p>
+    </div>
+  </div>
+</div>
+
+<!-- Screenshot 3: Features -->
+<div class="screenshot features-screen" id="s3">
+  <h2>功能特色</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-card-icon">🌐</div>
+      <h4>50+ 預設網站</h4>
+      <p>開箱即用，涵蓋主流、亞洲、創作者平台等分類</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-card-icon">🔍</div>
+      <h4>關鍵字比對</h4>
+      <p>捕捉任何網站上的相關內容，包括 GitHub、Reddit 等</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-card-icon">🔇</div>
+      <h4>搜尋建議抑制</h4>
+      <p>自動關閉 Chrome 搜尋建議，防止網址列洩露</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-card-icon">🛡️</div>
+      <h4>零資料外傳</h4>
+      <p>所有處理都在本地完成，絕不收集或傳輸資料</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-card-icon">📝</div>
+      <h4>完全自訂</h4>
+      <p>自由新增或移除網站和關鍵字</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-card-icon">⚡</div>
+      <h4>輕量快速</h4>
+      <p>僅 12KB，無背景常駐，不影響瀏覽效能</p>
+    </div>
+  </div>
+</div>
+
+<!-- Screenshot 4: Popup comparison -->
+<div class="screenshot popup-screen" id="s4">
+  <div class="popup-col">
+    <div class="popup-label-title">一般模式</div>
+    <div class="popup-label">所有紀錄正常顯示</div>
+    <div style="height:20px"></div>
+    <div class="mock-popup">
+      <h3>Curtain</h3>
+      <div class="mock-status safe">🟢 一般模式</div>
+      <div class="mock-btn activate">拉下簾幕</div>
+    </div>
+  </div>
+  <div class="arrow-between">→</div>
+  <div class="popup-col">
+    <div class="popup-label-title">簾幕模式</div>
+    <div class="popup-label">敏感紀錄已隱藏</div>
+    <div style="height:20px"></div>
+    <div class="mock-popup">
+      <h3>Curtain</h3>
+      <div class="mock-status active">🟠 簾幕模式（已隱藏）</div>
+      <div class="mock-btn restore">恢復全部</div>
+      <div class="mock-counts">已隱藏：128 筆紀錄、5 個書籤</div>
+      <div class="mock-tip">若網址列仍有殘留建議，可選取該項後按 <kbd>Shift</kbd>+<kbd>Delete</kbd> 手動移除</div>
+    </div>
+  </div>
+</div>
+
+<!-- Screenshot 5: Use cases -->
+<div class="screenshot usecases-screen" id="s5">
+  <h2>適用場景</h2>
+  <div class="usecases">
+    <div class="usecase">
+      <div class="usecase-emoji">📺</div>
+      <h4>會議投影</h4>
+      <p>分享螢幕前一鍵隱藏，安心展示</p>
+    </div>
+    <div class="usecase">
+      <div class="usecase-emoji">🎤</div>
+      <h4>作品 Demo</h4>
+      <p>現場展示時不怕網址列洩露</p>
+    </div>
+    <div class="usecase">
+      <div class="usecase-emoji">💻</div>
+      <h4>借用電腦</h4>
+      <p>把電腦借給別人前快速清理</p>
+    </div>
+    <div class="usecase">
+      <div class="usecase-emoji">👥</div>
+      <h4>結對程式</h4>
+      <p>Pair programming 時保護隱私</p>
+    </div>
+  </div>
+</div>
+
+<!-- Promo 440x280 -->
+<div class="promo-small" id="promo">
+  <div class="promo-icon">🪟</div>
+  <h2>Curtain</h2>
+  <p>一鍵隱藏敏感瀏覽紀錄與書籤<br>分享螢幕前的隱私防護</p>
+</div>
+
+<div class="nav">
+  <button class="active" onclick="show('s1',this)">Hero</button>
+  <button onclick="show('s2',this)">How</button>
+  <button onclick="show('s3',this)">Features</button>
+  <button onclick="show('s4',this)">Popup</button>
+  <button onclick="show('s5',this)">Cases</button>
+  <button onclick="show('promo',this)">Promo</button>
+</div>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.screenshot,.promo-small').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
