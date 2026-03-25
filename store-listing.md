@@ -17,7 +17,6 @@ Curtain lets you instantly hide sensitive browsing history and bookmarks before 
 
 **Features:**
 - One-click hide and restore for browsing history and bookmarks
-- 50+ pre-configured sites included
 - Keyword matching catches related content on any site (e.g., related tools on GitHub, discussions on Reddit)
 - Fully customizable site and keyword lists
 - Temporarily disables Chrome search suggestions to prevent address bar leaks
@@ -50,7 +49,6 @@ Curtain 讓你在分享螢幕前，一鍵隱藏敏感的瀏覽紀錄和書籤，
 
 **功能特色：**
 - 一鍵隱藏與恢復瀏覽紀錄及書籤
-- 內建 50+ 預設網站
 - 關鍵字比對功能，可捕捉任何網站上的相關內容（例如 GitHub 上的相關工具、Reddit 上的討論）
 - 完全自訂網站和關鍵字清單
 - 簾幕啟用時自動關閉 Chrome 搜尋建議，防止網址列洩露

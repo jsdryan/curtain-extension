@@ -1,80 +1,9 @@
-const DEFAULT_SITES = [
-  // Mainstream
-  'pornhub.com',
-  'xvideos.com',
-  'xhamster.com',
-  'xnxx.com',
-  'redtube.com',
-  'youporn.com',
-  'spankbang.com',
-  'eporner.com',
-  'tube8.com',
-  'tnaflix.com',
-  // Asian
-  'missav.com',
-  'jable.tv',
-  'thisav.com',
-  'avgle.com',
-  'javmost.com',
-  'supjav.com',
-  'netflav.com',
-  'hijav.tv',
-  // Creator / Subscription
-  'onlyfans.com',
-  'fansly.com',
-  'manyvids.com',
-  // Hentai / Anime
-  'hanime.tv',
-  'nhentai.net',
-  'hitomi.la',
-  'e-hentai.org',
-  'exhentai.org',
-  // Cam
-  'chaturbate.com',
-  'stripchat.com',
-  'bongacams.com',
-  // Forum / Image
-  'sex.com',
-  'imagefap.com',
-  // Erotic literature / Other
-  'literotica.com',
-  'porntrex.com',
-  'motherless.com',
-  'heavy-r.com',
-  'txxx.com',
-  'hqporner.com',
-  'daftsex.com',
-  'javbangers.com',
-  'misskon.com',
-  'wnacg.com',
-  '18comic.vip',
-  'comic18.org',
-  // Related / Aggregator
-  'coomer.su',
-  'kemono.su',
-  'maxjav.com',
-];
+// Default lists are empty — users add their own sites and keywords.
+const DEFAULT_SITES = [];
 
 // Keywords: match any URL or title containing these (case-insensitive).
-// Catches related tools, repos, discussions, Google searches on ANY site.
-const DEFAULT_KEYWORDS = [
-  'onlyfans',
-  'fansly',
-  'pornhub',
-  'xvideos',
-  'xhamster',
-  'nhentai',
-  'e-hentai',
-  'exhentai',
-  'missav',
-  'jable',
-  'javmost',
-  'maxjav',
-  'chaturbate',
-  'hentai',
-  'nsfw',
-  'porn',
-];
+// Catches related content on ANY site.
+const DEFAULT_KEYWORDS = [];
 
 // Initialize defaults on install
 chrome.runtime.onInstalled.addListener(async () => {
